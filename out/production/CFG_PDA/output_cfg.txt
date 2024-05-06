@@ -1,9 +1,26 @@
 1
-True
-True
-False
-False
+accepted
+accepted
+accepted
+not accepted
+not accepted
 end
-Unsupported problem number: 2
-Unsupported problem number: 3
-Unsupported problem number: 4
+1
+not accepted
+not accepted
+not accepted
+not accepted
+end
+1
+not accepted
+not accepted
+not accepted
+not accepted
+not accepted
+end
+1
+not accepted
+not accepted
+not accepted
+not accepted
+end

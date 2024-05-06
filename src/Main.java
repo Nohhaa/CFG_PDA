@@ -70,9 +70,9 @@ public class Main {
     private static List<String> simulateAutomaton1(int problemNumber, List<String> inputs) {
         switch (problemNumber) {
             case 1: return simulateCFG1(inputs);
-//            case 2: return simulateDFA2(inputs);
-//            case 3: return simulateDFA3(inputs);
-//            case 4: return simulateDFA4(inputs);
+            case 2: return simulateCFG1(inputs);
+            case 3: return simulateCFG1(inputs);
+            case 4: return simulateCFG1(inputs);
             default: return List.of("Unsupported problem number: " + problemNumber);
         }
     }
@@ -91,7 +91,9 @@ public class Main {
         Set<String> terminals = new HashSet<>(Arrays.asList("a", "b"));
         Set<String> nonTerminals = new HashSet<>(Arrays.asList("S"));
         Map<String, List<String>> rules = new HashMap<>();
-        rules.put("S", Arrays.asList("aSb", "bSa", " "));
+
+        rules.put("S", Arrays.asList("aSb", "bSa", "","aSbSbSa","bSaSaSb"));
+        //rules.put("A", Arrays.asList("S", " "));
         CFG cfg = new CFG("S", terminals, nonTerminals, rules);
         List<String> outputs = new ArrayList<>();
         outputs.add("1");
@@ -164,7 +166,6 @@ public class Main {
             }
             return false;
         }
-
 
 
 //        public static void main(String[] args) {
