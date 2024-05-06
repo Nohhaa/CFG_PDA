@@ -87,18 +87,16 @@ public class Main {
 //    }
 
     private static List<String> simulateCFG1(List<String> inputs) {
-        // Problem 1: DFA that accepts strings not containing "ba"
+        // Problem 1: Write a CFG for accepting an equal number of a's and b's.
+        Set<String> terminals = new HashSet<>(Arrays.asList("a", "b"));
+        Set<String> nonTerminals = new HashSet<>(Arrays.asList("S"));
         Map<String, List<String>> rules = new HashMap<>();
-        rules.put("S", Arrays.asList("ASB","BSA", ""));
-        rules.put("A", Arrays.asList("aB"));
-        rules.put("B", Arrays.asList("bA"));
-
-
-        CFG cfg = new CFG(rules);
+        rules.put("S", Arrays.asList("aSb", "bSa", " "));
+        CFG cfg = new CFG("S", terminals, nonTerminals, rules);
         List<String> outputs = new ArrayList<>();
         outputs.add("1");
         for (String test : inputs) {
-            outputs.add(cfg.belongsToCFG(test)? "True" : "False");
+            outputs.add(cfg.accept(test)? "accepted" : "not accepted");
         }
 
         outputs.add("end");
@@ -109,68 +107,74 @@ public class Main {
 
 
     public static class CFG {
-        private Map<String, List<String>> rules = new HashMap<>();
+        private String startSymbol;
+        private Set<String> terminals;
+        private Set<String> nonTerminals;
+        private Map<String, List<String>> productionRules;
 
-        public CFG( Map<String, List<String>> r) {
-            this.rules=r;
-
+        public CFG(String startSymbol, Set<String> terminals, Set<String> nonTerminals, Map<String, List<String>> productionRules) {
+            this.startSymbol = startSymbol;
+            this.terminals = terminals;
+            this.nonTerminals = nonTerminals;
+            this.productionRules = productionRules;
         }
 
-        private boolean belongsToCFG(String s) {
-            return checkDerivation("S", s);
+        public boolean accept(String input) {
+            return check(input, startSymbol);
         }
 
-        private boolean checkDerivation(String nonTerminal, String s) {
-            if (!this.rules.containsKey(nonTerminal)) {
-                return false;
-            }
-
-            for (String production : rules.get(nonTerminal)) {
-                if (matchProduction(production, s)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private boolean matchProduction(String production, String s) {
-            if (production.isEmpty()) {
-                return s.isEmpty();
-            }
-
-            List<String> parts = splitProduction(production);
-            return matchParts(parts, s, 0, new StringBuilder());
-        }
-
-        private boolean matchParts(List<String> parts, String s, int index, StringBuilder accumulated) {
-            if (index == parts.size()) {
-                return accumulated.toString().equals(s);
-            }
-
-            String part = parts.get(index);
-            if (rules.containsKey(part)) {
-                for (String prod : rules.get(part)) {
-                    StringBuilder newAccumulated = new StringBuilder(accumulated);
-                    newAccumulated.append(prod);
-                    if (matchParts(parts, s, index + 1, newAccumulated)) {
+        private boolean check(String input, String currentSymbol) {
+            if (nonTerminals.contains(currentSymbol)) {
+                List<String> productions = productionRules.get(currentSymbol);
+                for (String production : productions) {
+                    if (production.equals(" ") && input.isEmpty()) {
+                        return true; // Handle empty string production
+                    }
+                    if (simulate(input, production)) {
                         return true;
                     }
                 }
             } else {
-                accumulated.append(part);
-                return matchParts(parts, s, index + 1, accumulated);
+                return input.equals(currentSymbol);
             }
-
             return false;
         }
 
-        private List<String> splitProduction(String production) {
-            List<String> parts = new ArrayList<>();
-            for (char c : production.toCharArray()) {
-                parts.add(String.valueOf(c));
+        private boolean simulate(String input, String production) {
+            if (production.isEmpty()) {
+                return input.isEmpty();
             }
-            return parts;
+
+            // Recursive descent through the production
+            if (production.length() == 1) {
+                String symbol = String.valueOf(production.charAt(0));
+                return check(input, symbol);
+            } else {
+                for (int split = 0; split <= input.length(); split++) {
+                    String leftPart = split == 0 ? "" : input.substring(0, split);
+                    String rightPart = split == input.length() ? "" : input.substring(split);
+
+                    String firstSymbol = String.valueOf(production.charAt(0));
+                    String restProduction = production.substring(1);
+
+                    if (check(leftPart, firstSymbol) && simulate(rightPart, restProduction)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
+
+
+
+//        public static void main(String[] args) {
+//            Map<Character, List<String>> rules = new HashMap<>();
+//            rules.put('S', Arrays.asList("SS", "(S)", ""));
+//
+//            CFG cfg = new CFG('S', rules);
+//            String testInput = "((()))";
+//            System.out.println("Does the CFG generate the string '" + testInput + "'? " + cfg.generates(testInput));
+//        }
     }
 
 }
