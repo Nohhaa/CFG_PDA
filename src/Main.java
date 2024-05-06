@@ -69,10 +69,10 @@ public class Main {
     }
     private static List<String> simulateAutomaton1(int problemNumber, List<String> inputs) {
         switch (problemNumber) {
-            case 1: return simulateCFG2(inputs);
+            case 1: return simulateCFG1(inputs);
             case 2: return simulateCFG2(inputs);
-            case 3: return simulateCFG2(inputs);
-            case 4: return simulateCFG2(inputs);
+            case 3: return simulateCFG3(inputs);
+            case 4: return simulateCFG4(inputs);
             default: return List.of("Unsupported problem number: " + problemNumber);
         }
     }
@@ -107,7 +107,7 @@ public class Main {
     private static List<String> simulateCFG2(List<String> inputs) {
         // Problem 1:Write a CFG for accepting a number of a's is twice the number of b's.
         Set<String> terminals = new HashSet<>(Arrays.asList("a", "b"));
-        Set<String> nonTerminals = new HashSet<>(Arrays.asList("S","X","A"));
+        Set<String> nonTerminals = new HashSet<>(Arrays.asList("S"));
         Map<String, List<String>> rules = new HashMap<>();
 
         rules.put("S", Arrays.asList("aSabS","aSbaS","","bSaaS"));
@@ -119,6 +119,51 @@ public class Main {
             outputs.add(cfg.accept(test)? "accepted" : "not accepted");
         }
 
+        outputs.add("end");
+
+        return outputs;
+    }
+    private static List<String> simulateCFG3(List<String> inputs) {
+        // Problem 1:Write a CFG for accepting a number of a's is twice the number of b's.
+        Set<String> terminals = new HashSet<>(Arrays.asList("a", "b"));
+        Set<String> nonTerminals = new HashSet<>(Arrays.asList("S"));
+        Map<String, List<String>> rules = new HashMap<>();
+
+        rules.put("S", Arrays.asList("aSa","bSb","","a","b"));
+
+        CFG cfg = new CFG("S", terminals, nonTerminals, rules);
+        List<String> outputs = new ArrayList<>();
+        outputs.add("3");
+        for (String test : inputs) {
+            outputs.add(cfg.accept(test)? "accepted" : "not accepted");
+        }
+
+        outputs.add("end");
+
+        return outputs;
+    }
+
+    private static List<String> simulateCFG4(List<String> inputs) {
+        // Problem 1:Write a CFG for accepting a number of a's is twice the number of b's.
+        Set<String> terminals = new HashSet<>(Arrays.asList("a", "b"));
+        Set<String> nonTerminals = new HashSet<>(Arrays.asList("S","T"));
+        Map<String, List<String>> rules = new HashMap<>();
+
+
+        rules.put("S", Arrays.asList("aaaT","Taaa","aTaa","aaTa"));
+        rules.put("T", Arrays.asList("aaTb","aabT","abaT",""));
+
+
+        CFG cfg = new CFG("S", terminals, nonTerminals, rules);
+        List<String> outputs = new ArrayList<>();
+        outputs.add("4");
+        for (String test : inputs) {
+            outputs.add(cfg.accept(test)? "accepted" : "not accepted");
+        }
+        //3 0
+        //5 1
+        //7 2
+        //9 3
         outputs.add("end");
 
         return outputs;

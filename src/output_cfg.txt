@@ -1,7 +1,7 @@
-2
-not accepted
-not accepted
+1
 accepted
+accepted
+not accepted
 not accepted
 end
 2
@@ -10,16 +10,16 @@ not accepted
 not accepted
 accepted
 end
-2
-accepted
+3
 accepted
 not accepted
+accepted
 accepted
 not accepted
 end
-2
-not accepted
-not accepted
+4
+accepted
+accepted
 not accepted
 not accepted
 end
