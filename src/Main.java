@@ -59,7 +59,7 @@ public class Main {
                         inputs.clear();
                     }
                     readInputs = false; // Stop reading inputs until next problem number is found
-                } else if (!line.isEmpty() && readInputs) {
+                } else if ( readInputs) {
                     // Collect inputs if we are within a valid input block
                     inputs.add(line);
                 }
@@ -69,10 +69,10 @@ public class Main {
     }
     private static List<String> simulateAutomaton1(int problemNumber, List<String> inputs) {
         switch (problemNumber) {
-            case 1: return simulateCFG1(inputs);
-            case 2: return simulateCFG1(inputs);
-            case 3: return simulateCFG1(inputs);
-            case 4: return simulateCFG1(inputs);
+            case 1: return simulateCFG2(inputs);
+            case 2: return simulateCFG2(inputs);
+            case 3: return simulateCFG2(inputs);
+            case 4: return simulateCFG2(inputs);
             default: return List.of("Unsupported problem number: " + problemNumber);
         }
     }
@@ -92,11 +92,29 @@ public class Main {
         Set<String> nonTerminals = new HashSet<>(Arrays.asList("S"));
         Map<String, List<String>> rules = new HashMap<>();
 
-        rules.put("S", Arrays.asList("aSb", "bSa", "","aSbSbSa","bSaSaSb"));
-        //rules.put("A", Arrays.asList("S", " "));
+        rules.put("S", Arrays.asList("aSbS", "bSaS", ""));
         CFG cfg = new CFG("S", terminals, nonTerminals, rules);
         List<String> outputs = new ArrayList<>();
         outputs.add("1");
+        for (String test : inputs) {
+            outputs.add(cfg.accept(test)? "accepted" : "not accepted");
+        }
+
+        outputs.add("end");
+
+        return outputs;
+    }
+    private static List<String> simulateCFG2(List<String> inputs) {
+        // Problem 1:Write a CFG for accepting a number of a's is twice the number of b's.
+        Set<String> terminals = new HashSet<>(Arrays.asList("a", "b"));
+        Set<String> nonTerminals = new HashSet<>(Arrays.asList("S","X","A"));
+        Map<String, List<String>> rules = new HashMap<>();
+
+        rules.put("S", Arrays.asList("aSabS","aSbaS","","bSaaS"));
+
+        CFG cfg = new CFG("S", terminals, nonTerminals, rules);
+        List<String> outputs = new ArrayList<>();
+        outputs.add("2");
         for (String test : inputs) {
             outputs.add(cfg.accept(test)? "accepted" : "not accepted");
         }
@@ -153,11 +171,17 @@ public class Main {
                 return check(input, symbol);
             } else {
                 for (int split = 0; split <= input.length(); split++) {
+//                    System.out.println("split "+split);
+
                     String leftPart = split == 0 ? "" : input.substring(0, split);
                     String rightPart = split == input.length() ? "" : input.substring(split);
 
                     String firstSymbol = String.valueOf(production.charAt(0));
                     String restProduction = production.substring(1);
+//                    System.out.println("leftPart "+leftPart);
+//                    System.out.println("rightPart "+rightPart);
+//                    System.out.println("firstSymbol "+firstSymbol);
+//                    System.out.println("restProduction "+restProduction);
 
                     if (check(leftPart, firstSymbol) && simulate(rightPart, restProduction)) {
                         return true;

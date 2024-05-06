@@ -1,23 +1,23 @@
-1
+2
+not accepted
+not accepted
+accepted
+not accepted
+end
+2
+accepted
+not accepted
+not accepted
+accepted
+end
+2
 accepted
 accepted
 not accepted
+accepted
 not accepted
 end
-1
-not accepted
-not accepted
-not accepted
-not accepted
-end
-1
-not accepted
-not accepted
-not accepted
-not accepted
-not accepted
-end
-1
+2
 not accepted
 not accepted
 not accepted
