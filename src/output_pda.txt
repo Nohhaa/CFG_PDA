@@ -1,20 +1,23 @@
 1
-False
-False
-False
-False
-False
-False
-False
-False
-False
-False
-False
-False
-False
-False
-False
-False
-False
-False
+accepted
+accepted
+not accepted
+not accepted
+end
+2
+accepted
+accepted
+not accepted
+not accepted
+end
+3
+accepted
+accepted
+not accepted
+not accepted
+end
+4
+accepted
+accepted
+not accepted
 end
