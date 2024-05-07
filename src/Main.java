@@ -196,7 +196,7 @@ public class Main {
         return outputs;
     }
     private static List<String> simulatePDA1(List<String> inputs) {
-        // Problem 1: DFA that accepts strings not containing "ba"
+        // Problem 1: Design a PDA for accepting a language {anbn n>=0}.
         String[] stateNames = {"q1","q2","q3"};
         Object[][] transitions = {
                 // {fromState, readCharacter, popStack, pushStack, toState}
@@ -224,7 +224,7 @@ public class Main {
         return outputs;
     }
     private static List<String> simulatePDA2(List<String> inputs) {
-        // Problem 1: DFA that accepts strings not containing "ba"
+        // Problem 2: Design a PDA for accepting a language {a2nb3n n>=1}.
         String[] stateNames = {"q1","q2","q3","q4","q5","q6","q7"};
         Object[][] transitions = {
                 // {fromState, readCharacter, popStack, pushStack, toState}
@@ -257,7 +257,8 @@ public class Main {
     }
 
     private static List<String> simulatePDA3(List<String> inputs) {
-        // Problem 1: DFA that accepts strings not containing "ba"
+        // Problem 3:  Design a PDA for accepting a language that consists of strings of balanced left and right brackets.
+
         String[] stateNames = {"q1","q2","q3"};
         Object[][] transitions = {
                 // {fromState, readCharacter, popStack, pushStack, toState}
@@ -286,7 +287,7 @@ public class Main {
     }
 
     private static List<String> simulatePDA4(List<String> inputs) {
-        // Problem 1: DFA that accepts strings not containing "ba"
+        // Problem 4: Design a PDA for accepting a language {an+mbncm| n , m>=1}.
         String[] stateNames = {"q1","q2","q3","q4"};
         Object[][] transitions = {
                 // {fromState, readCharacter, popStack, pushStack, toState}
