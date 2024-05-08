@@ -16,4 +16,8 @@ accepted
 not accepted
 not accepted
 end
-Unsupported problem number: 4
+4
+accepted
+accepted
+not accepted
+end

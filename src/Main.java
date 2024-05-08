@@ -40,19 +40,19 @@ public class Main {
 
                 if (line.matches("\\d+")) {
                     if (!inputs.isEmpty()) {
-                        System.out.println("hhhhhhhhhhh"+inputs);
+//                        System.out.println("hhhhhhhhhhh"+inputs);
 
                         results.addAll(simulateAutomaton2(problemNumber, inputs));
-                        System.out.println("hhhhhhhhhhh"+results);
+//                        System.out.println("hhhhhhhhhhh"+results);
                         inputs.clear();
                     }
                     problemNumber = Integer.parseInt(line);
                     readInputs = true;
                 } else if (line.equalsIgnoreCase("end")) {
                     if (!inputs.isEmpty() && readInputs) {
-                        System.out.println("hhhhhhhhhhh"+inputs);
+//                        System.out.println("hhhhhhhhhhh"+inputs);
                         results.addAll(simulateAutomaton1(problemNumber, inputs));
-                        System.out.println("hhhhhhhhhhh"+results);
+//                        System.out.println("hhhhhhhhhhh"+results);
                         inputs.clear();
                     }
                     readInputs = false;
@@ -76,19 +76,19 @@ public class Main {
 
                 if (line.matches("\\d+")) {
                     if (!inputs.isEmpty()) {
-                        System.out.println("hhhhhhhhhhh"+inputs);
+//                        System.out.println("hhhhhhhhhhh"+inputs);
 
                         results.addAll(simulateAutomaton2(problemNumber, inputs));
-                        System.out.println("hhhhhhhhhhh"+results);
+//                        System.out.println("hhhhhhhhhhh"+results);
                         inputs.clear();
                     }
                     problemNumber = Integer.parseInt(line);
                     readInputs = true;
                 } else if (line.equalsIgnoreCase("end")) {
                     if (!inputs.isEmpty() && readInputs) {
-                        System.out.println("hhhhhhhhhhh"+inputs);
+//                        System.out.println("hhhhhhhhhhh"+inputs);
                         results.addAll(simulateAutomaton2(problemNumber, inputs));
-                        System.out.println("hhhhhhhhhhh"+results);
+//                        System.out.println("hhhhhhhhhhh"+results);
                         inputs.clear();
                     }
                     readInputs = false;
